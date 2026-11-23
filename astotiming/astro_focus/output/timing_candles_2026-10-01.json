@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2026-10-01",
+    "time": "01:57",
+    "planet1": "Moon",
+    "planet2": "Lilith",
+    "aspect": "Quincunx",
+    "degree": 150,
+    "bias": "Shadashtaka",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "04:10",
+    "planet1": "Moon",
+    "planet2": "Pluto",
+    "aspect": "Trine",
+    "degree": 120,
+    "bias": "Favourable - Bhrigu Nandi Nadi",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "08:13",
+    "planet1": "Moon",
+    "planet2": "Uranus",
+    "aspect": "Conjunction",
+    "degree": 0,
+    "bias": "Context dependent",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "12:09",
+    "planet1": "Mars",
+    "planet2": "Lilith",
+    "aspect": "Quincunx",
+    "degree": 150,
+    "bias": "Shadashtaka",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "12:35",
+    "planet1": "Sun",
+    "planet2": "Moon",
+    "aspect": "Trine",
+    "degree": 120,
+    "bias": "Favourable - Bhrigu Nandi Nadi",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "13:04",
+    "planet1": "Moon",
+    "planet2": "Venus",
+    "aspect": "Quincunx",
+    "degree": 150,
+    "bias": "Shadashtaka",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "20:04",
+    "planet1": "Sun",
+    "planet2": "Venus",
+    "aspect": "Semi Sextile",
+    "degree": 30,
+    "bias": "Dwidwadasha",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  }
+]

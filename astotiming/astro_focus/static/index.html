@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Focus Dates · Chandra Market Desk</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/astotiming/static/dashboard.css?v=focus-readable-type-20261123">
+</head>
+<body data-page="astro">
+<header>
+  <a class="brand" href="/" aria-label="Chandra Trend Engine home"><svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M80 25 A36 36 0 1 0 80 75" fill="none" stroke="white" stroke-width="8"/><path d="M48 5V22 M6 50H23 M48 78V95" stroke="white" stroke-width="4"/><path d="M29 65L48 46L63 60L87 31" fill="none" stroke="#f7c83d" stroke-width="7" stroke-linejoin="miter"/><path d="M75 29L94 24L89 44Z" fill="#f7c83d"/></svg><span class="brand-name"><span>CHANDRA</span><span>TREND ENGINE</span></span></a>
+  <nav><a href="/money.html">Money</a><a href="/oi.html">Open interest</a><a href="/macd.html">Momentum Scanner</a><a class="active" href="/astotiming/">Focus Dates</a></nav>
+  <button id="theme" type="button" aria-label="Switch theme">Black theme</button><span id="mode" class="pill">Connecting</span>
+</header>
+<main>
+  <div class="heading"><div><p class="eyebrow">ASTRO TIMING / MARKET CALENDAR</p><h1>Astro Timing</h1></div><div class="actions"><span id="status" class="muted" role="status"></span></div></div>
+  <section class="panel astro-overview">
+    <div class="controls astro-calendar-controls"><label>All Events month<input type="month" id="month" aria-label="Choose All Events calendar month"></label><button id="generate" class="primary">Generate calendar</button><button id="excel">Export Excel</button></div>
+    <div class="metrics">
+      <article class="panel"><small>Focus events</small><strong id="dates">—</strong><span>Today, tomorrow, and active events</span></article>
+      <article class="panel"><small>Major events · P1</small><strong id="major">—</strong><span>Today, tomorrow, and ongoing</span></article>
+      <article class="panel"><small>Bullish / bearish records</small><strong id="biascount">—</strong><span>Today, tomorrow, and ongoing</span></article>
+    </div>
+  </section>
+  <section class="panel workspace">
+    <nav id="tabs" aria-label="Dashboard views"></nav>
+    <div id="calendarview">
+      <div class="toolbar"><div><h2 id="heading">Today &amp; tomorrow · active events</h2></div><div class="filters"><label>Instrument<select id="instrument"></select></label><label>Direction<select id="bias"></select></label><label>Priority<select id="priority"><option>All</option><option>P1</option><option>P2</option><option>P3</option></select></label><label>Search<input id="search" placeholder="Planet or event"></label><button id="csv">Export CSV</button></div></div>
+      <div class="tablewrap"><table id="events"></table></div><div id="count" class="foot"></div>
+      <section id="focusTimingPanel" class="panel focus-timing-panel">
+        <div class="toolbar"><div><h2>Timing candles · <span id="focusTimingDate">Today</span></h2><small id="focusTimingSubtitle" class="muted">Loading…</small></div><div class="actions"><button id="focusTimingToday" type="button">Today</button><button id="focusTimingTomorrow" type="button">Tomorrow</button><a href="#" id="openDailyTiming">Full Daily Timing Candles</a></div></div>
+        <p id="focusTimingStatus" class="muted" role="status">Loading daily timing candles…</p><div class="tablewrap"><table id="focusTimings"></table></div>
+        
+      </section>
+      <aside class="astro-quick-reference" aria-label="Astrology quick reference"><strong class="quick-title">Quick reference</strong><div class="quick-row"><b>Benefics</b><span>Jupiter, Venus, Mercury, Moon**</span><b>Malefics</b><span>Saturn, Mars, Sun, Rahu, Ketu</span></div><div class="quick-row"><b>Super bullish Rashis</b><span>4 Cancer · 8 Scorpio · 12 Pisces</span><b>Super bearish Rashis</b><span>2 Taurus · 5 Leo · 10 Capricorn</span></div></aside>
+    </div>
+    <div id="timingview" hidden>
+      <div class="toolbar timing-toolbar"><div class="timing-actions"><button id="today">Today</button><button id="tomorrow">Tomorrow</button><label>Choose date<input type="date" id="day"></label><button id="fetch" class="primary">Fetch timings</button><a id="gandamoolShortcut" target="_blank" rel="noopener">Drik Gandamool</a></div></div>
+      <p class="muted">House convention: Mumbai · D1/Rashi whole-sign · Lahiri/Chitra Paksha. House is counted from the ascendant; Rashi number/name matches the sign number shown in Drik Panchang. Listed event time is treated as IST; confirm with <a href="https://www.drikpanchang.com/jyotisha/kundali/kundali.html" target="_blank" rel="noopener">Drik Panchang Kundali</a>. Moon Papakartari checks adjacent Rashis and degree positions when malefics share the Moon’s Rashi. Same motion (all Direct or all Retro) = Bullish; mixed motion = Bearish.</p>
+      <div class="toolbar timing-results-toolbar"><span id="timingstatus" role="status">Select a date and fetch.</span><div class="timing-results-actions"><label>Aspect<select id="aspect"><option>All</option></select></label><button id="copy">Copy TradingView</button><button id="txt">Export TXT</button><button id="dailycsv">Export CSV</button></div></div>
+      <div class="tablewrap"><table id="timings"></table></div><details id="d9MarketPanel"><summary>Moon D9 windows during NSE market hours</summary><p id="d9WindowSummary" class="muted">Fetch a date to calculate intraday D9 windows.</p><div class="tablewrap"><table id="d9windows"></table></div></details><pre id="preview"></pre>
+    </div>
+    <div id="lookupview" hidden>
+      <section class="panel"><div class="toolbar"><h2>Astro Lookup</h2><button id="lookupDownload">Download original workbook</button></div><p class="muted">Reference rules from Combined_Lookup.xlsx — not validated market predictions.</p>
+        <nav id="lookupTabs" aria-label="Lookup types"><button type="button" data-lookup-tab="Sector Lookup">Sector Lookup</button><button type="button" data-lookup-tab="D9 Lookup">D9 Lookup</button><button type="button" data-lookup-tab="Rashi Lookup">Rashi Lookup</button></nav>
+        <section id="lookupSector"><div class="controls"><label>Sector<input id="lookupSectorQuery" placeholder="Partial sector name"></label><label>Planet<select id="lookupSectorPlanet"><option>All</option></select></label></div><div class="tablewrap"><table id="lookupSectorTable"></table></div><p class="muted">Node = Rahu for sector lookup. Ketu has no sectors listed in the workbook.</p></section>
+        <section id="lookupD9" hidden><div class="controls"><label>Planet 1<select id="lookupD9P1"></select></label><label>Planet 2<select id="lookupD9P2"></select></label></div><div class="tablewrap"><table id="lookupD9Table"></table></div><p class="muted">Node searches Rahu and Ketu; shared source rows appear once.</p><details><summary>All D9 conjunction rules</summary><div class="tablewrap"><table id="lookupD9All"></table></div></details></section>
+        <section id="lookupRashi" hidden><div class="controls"><label>Rashi 1<input id="lookupRashi1" value="Taurus"></label><label>Rashi 2<input id="lookupRashi2" value="Gemini"></label></div><p id="lookupRashiRelationship"></p><div class="tablewrap"><table id="lookupRashiTable"></table></div><details><summary>All Rashi aspect rules</summary><div class="tablewrap"><table id="lookupRashiAll"></table></div></details></section>
+      </section>
+    </div>
+    <div id="historyview" hidden><div class="toolbar"><strong id="inlinehistorytitle"></strong><button id="hclose" hidden>Close history</button></div><div class="toolbar"><div class="filters"><label id="heventlabel">Event<select id="hevent"></select></label><label>Instrument<select id="hmarket"></select></label><label>Instances<select id="hcount"><option>10</option><option>5</option><option>20</option><option>30</option><option>50</option><option>100</option></select></label><label>Session<select id="hmode"><option value="post">First relevant session</option><option value="event">Calendar event day</option></select></label><button id="hanalyze" class="primary">Analyze</button><button id="hfetch">Fetch market history</button></div></div><div id="hstatus" class="foot"></div><div id="hmetrics" class="metrics"></div><p id="hsummary"></p><details><summary>Show more — historical observations</summary><button id="hexport">Export history CSV</button><div class="tablewrap"><table id="htable"></table></div><p id="hmissing"></p><small>Daily OHLC cannot isolate post-aspect intraday returns. Source status is included in each row.</small></details></div>
+  </section>
+</main>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("market-desk-theme")||"light"}catch{document.documentElement.dataset.theme="light"}document.getElementById("theme").addEventListener("click",()=>{const e=document.documentElement,t=e.dataset.theme==="dark"?"light":"dark";e.dataset.theme=t;try{localStorage.setItem("market-desk-theme",t)}catch{}document.getElementById("theme").textContent=t==="dark"?"White theme":"Black theme"});document.getElementById("theme").textContent=document.documentElement.dataset.theme==="dark"?"White theme":"Black theme"</script>
+<script src="/astotiming/static/dashboard.js?v=focus-readable-type-20261123"></script>
+</body>
+</html>

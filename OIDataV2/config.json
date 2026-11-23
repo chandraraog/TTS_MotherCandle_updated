@@ -1,0 +1,50 @@
+{
+  "money": {
+    "symbol": "NSE:NIFTY50-INDEX",
+    "expiry": "1796119800",
+    "strikes": 5,
+    "interval_seconds": 0,
+    "oi_multiplier": 1
+  },
+  "oi": {
+    "universe": "all",
+    "symbols": [
+      "NSE:NIFTY50-INDEX",
+      "NSE:NIFTYBANK-INDEX",
+      "NSE:ICICIBANK-EQ",
+      "NSE:ABB-EQ",
+      "NSE:COFORGE-EQ",
+      "NSE:DIVISLAB-EQ",
+      "NSE:DIXON-EQ",
+      "NSE:HEROMOTOCO-EQ",
+      "NSE:MARUTI-EQ",
+      "NSE:MCX-EQ",
+      "NSE:OFSS-EQ",
+      "NSE:SIEMENS-EQ",
+      "NSE:TRENT-EQ",
+      "NSE:ULTRACEMCO-EQ",
+      "NSE:COLPAL-EQ",
+      "NSE:MIDCPNIFTY-INDEX",
+      "NSE:FINNIFTY-INDEX"
+    ],
+    "interval_seconds": 3600,
+    "mode": "daily",
+    "daily_time": "15:35",
+    "min_price": 1000
+  },
+  "nse": {
+    "enabled": true,
+    "daily_time": "18:30",
+    "retry_seconds": 1800,
+    "history_days": 3
+  },
+  "market": {
+    "start": "09:15",
+    "end": "15:30",
+    "holidays": []
+  },
+  "requests_per_second": 0.5,
+  "retention_days": 30,
+  "requests_per_minute": 40,
+  "requests_per_day": 4500
+}

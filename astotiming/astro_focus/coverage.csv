@@ -1,0 +1,15 @@
+Category,Status,Notes
+Tithi,Partial,November and December 2026 Trayodashi exact Mumbai intervals verified; other Tithi coverage partial
+Moon Nakshatra,Partial,Selected published boundaries; Jyeshtha and Moola split pending
+Gandamool,Published,Four combined periods in Delhi IST
+Rashi transit,Calculated observation,All nine graha Rashi changes and Mars-in-Cancer interval; Lahiri Swiss Ephemeris calculation; source cross-check pending
+Nakshatra transit,Partial,Selected published entries
+Combustion,Partial,Mercury Delhi only; verify Mumbai and other planets
+Retrograde,Partial,Saturn and Jupiter imported; remaining planets not verified
+Eclipse,Pending,Annual source not imported; blank does not mean no eclipse
+Conjunction,Calculated observation,Sun–Ketu within 1° in Leo tracked as a timed Lahiri interval; verify against Drik Panchang
+Timing Candles,Pending,Full monthly aspect list not imported
+Yoga / D9 / Massive Moves,Input required,Drik timestamped nine-planet sidereal positions required; snapshot detector available
+Sector Watch,Rules only,No historical price data or sector signals imported
+Saturn window,Rule only,No exact boundary imported; exchange-specific trading calendar required
+Source access,Manual import,No automated website scraping or API connection implemented

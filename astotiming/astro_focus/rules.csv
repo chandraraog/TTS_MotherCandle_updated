@@ -1,0 +1,47 @@
+ID,Rule,Hypothesis,Implementation
+M01,Krishna Trayodashi,Bearish,Exact interval from Drik; observance separate
+M02,Shukla Trayodashi,Bullish,Exact interval from Drik; observance separate
+M03,Purnima and Amavasya,Reversal,Track both tithi and exact lunation separately
+M04,Pushya,Reversal · check previous trend,Reversal point; assess the preceding trend
+M16,Moola,Bearish · Super bearish day,About once per month during Moon transit
+M17,Graha Rashi changes / Mars in Cancer,Gap Up/Down observation,Review charts the previous day; record following NSE session gap only
+M18,Sun and Ketu within 1° in Leo,One-direction move observation,Review chart the previous day; record whether the next NSE session moved mainly in one direction; no direction predicted
+M19,Planet enters its Mool Trikona focus Rashi,Sector / stock focus,Create an ingress event and review the planet-mapped sectors in Astro Lookup; observation only
+M05,Uttara Phalguni,Bullish,Session overlap
+M06,Jyeshtha and six Gandamool,Research,Do not double count nested events
+M07,Moon Mars,Bullish / reversal,Exact aspect plus two-day research window
+M08,Moon Sun / Saturn / Uranus / Pluto / Rahu,Bullish,Separate exact D1 and D9 conditions
+M09,Moon Jupiter / Venus / Neptune / Ketu,Bearish,Separate exact D1 and D9 conditions
+M10,Moon Mercury,Bounce,Exact aspect
+P01,Five Vedic planets same Rashi,Directional,Observe after event-day close
+P02,Saturn sign boundary direct or retrograde,Bearish,Review longs; 8–10 subsequent trading sessions
+P03,Mars Rahu same sign within 3 degrees,Volatility,Snapshot detector
+P04,Mars 12th from Saturn,Directional,Snapshot detector
+P05,Jupiter 29 to 1 degree boundary,Directional,Track daily; emphasize Cancer Scorpio Pisces
+P06,Mercury combustion >=29 days,Bearish,Published duration
+P07,Mercury combustion <20 days,Bullish,Published duration
+P08,Mercury combustion 20 to <29 days,Neutral,Published duration
+P09,Mercury Papa Kartari or malefic Drishti,Bullish,Modifier; mixed aspects conflict
+P10,Mercury benefic Drishti,Bearish,Modifier; mixed aspects conflict
+P11,Mars Sagittarius / Capricorn,Bearish / bullish,Transit period
+P12,Rahu Dhanishta,Bearish,Long term research
+P13,Sun Pushya entry / exit,Bearish / bullish,Gold
+P14,Sun Anuradha,Bullish,Gold 10-year backtest
+P15,Major planet transit,Gap watch,Sun cardinal signs and all major ingresses
+P16,Mars Jupiter / Sun Jupiter / Sun Saturn / Sun Mercury,Directional,Exact conjunction
+P17,Venus Mercury simultaneous combustion,Bearish,4–10 day research window; definition pending
+Y01,Moon Papa Kartari,Research,Adjacent signs contain malefics
+Y02,Exchange yoga,Research,Mutual classical sign lords
+D01,Moon D9 Taurus or Cancer,Bullish,Snapshot detector
+D02,Moon D1 equals D9,Research,Cancer bullish
+D03,Moon Ashwini Pada 3,Bullish,Snapshot detector
+D04,Moon same D9 as other planet,Research,Separate from exact conjunction
+S01,Sun Leo / own nakshatras,Research,PSU SBI; degree strength and aspects
+S02,Sun Mercury Moon,Research,Index; Sun Mercury bullish hypothesis
+S03,Venus Moon,Research,Metals; Venus banks and textiles
+S04,Saturn aspects,Research,Crude Oil 15 minute timing candle
+S05,Mars Ketu / Mars Mercury,Bearish,Same sign and exact aspects separate
+S06,Sun Moon Mars / Krittika Rohini Mrigashira,Research,Group and friendship research
+E01,Eclipse,Volatility,Global and India visibility separate
+E02,Retrograde and combustion all planets,Research,Carry intervals across months
+T02,Exact aspects 0 30 90 120 150 180,Research,Prokerala IST; daily timing candle

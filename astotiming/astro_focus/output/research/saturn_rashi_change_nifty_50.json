@@ -1,0 +1,12 @@
+{
+  "event": "Saturn Rashi Change",
+  "market": "NIFTY 50",
+  "requested": 50,
+  "available_events": 27,
+  "mode": "post",
+  "rows": [],
+  "missing": [],
+  "stats": {},
+  "summary": "This research requires continuous daily OHLC. Select Fetch / cache market history or import an official NSE CSV. The bundled sparse conjunction cache is not sufficient.",
+  "status": "Market history required"
+}

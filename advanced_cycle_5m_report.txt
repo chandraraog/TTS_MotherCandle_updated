@@ -1,0 +1,78 @@
+====================================================================================================
+ADVANCED CYCLE - BACKEND DETAILS (NSE:NIFTY50-INDEX)
+====================================================================================================
+Symbol              : NSE:NIFTY50-INDEX
+FYERS candles       : 1575
+Last candle         : 19-Nov-2026 14:15
+Pivot count         : 310
+Cycle tolerance     : +/- 0 bars
+Current status      : Normal Cycle
+
+ORIGIN (A -> B -> C)
+----------------------------------------------------------------------------------------------------
+Source : Auto (latest EXACT chain)
+A : HIGH 11-Nov-2026 11:40
+B : LOW 11-Nov-2026 15:10  (A->B = 42 bars)
+C : HIGH 12-Nov-2026 10:40  (B->C = 21 bars, A->C = 63 bars)
+
+RECENT 42 -> 21 CHAINS
+----------------------------------------------------------------------------------------------------
+006  LOW 26-Oct-2026 10:35 --42--> HIGH 26-Oct-2026 14:05 | 42 error=+0 | 21 pending
+007  HIGH 26-Oct-2026 12:00 --42--> LOW 27-Oct-2026 09:15 | 42 error=+0 | 21 pending
+008  HIGH 26-Oct-2026 14:05 --42--> LOW 27-Oct-2026 11:20 | 42 error=+0 | 21 pending
+009  HIGH 27-Oct-2026 10:00 --42--> LOW 27-Oct-2026 13:30 | 42 error=+0 | 21 pending
+010  LOW 27-Oct-2026 10:20 --42--> HIGH 27-Oct-2026 13:50 | 42 error=+0 | 21 pending
+011  LOW 27-Oct-2026 14:15 --42--> HIGH 28-Oct-2026 11:30 | 42 error=+0 | 21 pending
+012  LOW 28-Oct-2026 09:30 --42--> HIGH 28-Oct-2026 13:00 | 42 error=+0 | 21 pending
+013  LOW 29-Oct-2026 11:25 --42--> HIGH 29-Oct-2026 14:55 | 42 error=+0 | 21 pending
+014  LOW 29-Oct-2026 15:05 --42--> HIGH 30-Oct-2026 12:20 | 42 error=+0 | 21 pending
+015  LOW 30-Oct-2026 09:25 --42--> HIGH 30-Oct-2026 12:55 | 42 error=+0 | 21 pending
+016  HIGH 30-Oct-2026 09:35 --42--> LOW 30-Oct-2026 13:05 | 42 error=+0 | 21 pending
+017  LOW 03-Nov-2026 10:10 --42--> HIGH 03-Nov-2026 13:40 | 42 error=+0 | 21 pending
+018  HIGH 05-Nov-2026 13:45 --42--> LOW 06-Nov-2026 11:00 --21--> HIGH 06-Nov-2026 12:45 | errors=+0/+0 | EXACT
+019  LOW 05-Nov-2026 13:55 --42--> HIGH 06-Nov-2026 11:10 | 42 error=+0 | 21 pending
+020  HIGH 05-Nov-2026 14:05 --42--> LOW 06-Nov-2026 11:20 | 42 error=+0 | 21 pending
+021  LOW 05-Nov-2026 14:20 --42--> HIGH 06-Nov-2026 11:35 | 42 error=+0 | 21 pending
+022  LOW 06-Nov-2026 09:15 --42--> HIGH 06-Nov-2026 12:45 | 42 error=+0 | 21 pending
+023  LOW 06-Nov-2026 12:00 --42--> HIGH 08-Nov-2026 14:20 | 42 error=+0 | 21 pending
+024  HIGH 09-Nov-2026 09:45 --42--> LOW 09-Nov-2026 13:15 | 42 error=+0 | 21 pending
+025  LOW 09-Nov-2026 12:30 --42--> HIGH 11-Nov-2026 09:45 --21--> LOW 11-Nov-2026 11:30 | errors=+0/+0 | EXACT
+026  HIGH 09-Nov-2026 14:15 --42--> LOW 11-Nov-2026 11:30 | 42 error=+0 | 21 pending
+027  HIGH 11-Nov-2026 11:40 --42--> LOW 11-Nov-2026 15:10 --21--> HIGH 12-Nov-2026 10:40 | errors=+0/+0 | EXACT
+028  LOW 12-Nov-2026 12:40 --42--> HIGH 13-Nov-2026 09:55 | 42 error=+0 | 21 pending
+029  LOW 13-Nov-2026 14:20 --42--> HIGH 16-Nov-2026 11:35 | 42 error=+0 | 21 pending
+030  LOW 18-Nov-2026 09:45 --42--> HIGH 18-Nov-2026 13:15 | 42 error=+0 | 21 pending
+031  LOW 18-Nov-2026 12:00 --42--> HIGH 19-Nov-2026 09:15 | 42 error=+0 | 21 pending
+032  HIGH 18-Nov-2026 12:15 --42--> LOW 19-Nov-2026 09:30 | 42 error=+0 | 21 pending
+033  HIGH 18-Nov-2026 13:15 --42--> LOW 19-Nov-2026 10:30 | 42 error=+0 | 21 pending
+034  HIGH 19-Nov-2026 09:15 --42--> LOW 19-Nov-2026 12:45 | 42 error=+0 | 21 pending
+035  LOW 19-Nov-2026 09:30 --42--> HIGH 19-Nov-2026 13:00 | 42 error=+0 | 21 pending
+
+SUMMARY
+----------------------------------------------------------------------------------------------------
+Total 42->21 candidates : 35
+Exact completed chains  : 3
+Near completed chains   : 0
+42-leg only / pending   : 32
+
+NEXT PROJECTIONS
+----------------------------------------------------------------------------------------------------
+          PENDING_21 | Origin : HIGH 19-Nov-2026 13:00 | +21 bars | Target : LOW 19-Nov-2026 14:45
+
+UPCOMING CONVERGENCE / MOTHER CANDLE (next 15)
+----------------------------------------------------------------------------------------------------
+         Normal Cycle (Single Line) | lines=BC       | bar   1576 | 19-Nov-2026 14:25
+            Mother Candle - 3 Lines | lines=AB+AC+BC | bar   1597 | 20-Nov-2026 09:55
+         Normal Cycle (Single Line) | lines=BC       | bar   1618 | 20-Nov-2026 11:40
+              Convergence - 2 Lines | lines=AB+BC    | bar   1639 | 20-Nov-2026 13:25
+              Convergence - 2 Lines | lines=AC+BC    | bar   1660 | 20-Nov-2026 15:10
+              Convergence - 2 Lines | lines=AB+BC    | bar   1681 | 23-Nov-2026 10:40
+         Normal Cycle (Single Line) | lines=BC       | bar   1702 | 23-Nov-2026 12:25
+            Mother Candle - 3 Lines | lines=AB+AC+BC | bar   1723 | 23-Nov-2026 14:10
+         Normal Cycle (Single Line) | lines=BC       | bar   1744 | 24-Nov-2026 09:40
+              Convergence - 2 Lines | lines=AB+BC    | bar   1765 | 24-Nov-2026 11:25
+              Convergence - 2 Lines | lines=AC+BC    | bar   1786 | 24-Nov-2026 13:10
+              Convergence - 2 Lines | lines=AB+BC    | bar   1807 | 24-Nov-2026 14:55
+         Normal Cycle (Single Line) | lines=BC       | bar   1828 | 25-Nov-2026 10:25
+            Mother Candle - 3 Lines | lines=AB+AC+BC | bar   1849 | 25-Nov-2026 12:10
+         Normal Cycle (Single Line) | lines=BC       | bar   1870 | 25-Nov-2026 13:55

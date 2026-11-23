@@ -1,0 +1,13 @@
+.env
+**/.env
+__pycache__/
+*.pyc
+logs/
+state/
+*.log
+*_state.json
+*.sqlite
+*.sqlite3
+*.db
+OIDataV2/data/
+OIData/Flattrade_livedata.xlsx

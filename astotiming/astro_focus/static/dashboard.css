@@ -1,0 +1,89 @@
+/* Astro Focus content uses the shared OIDataV2 dashboard tokens and components. */
+body[data-page="astro"] main{max-width:none;padding:10px 16px}
+body[data-page="astro"] .heading{margin-bottom:8px;gap:12px}
+body[data-page="astro"] .heading h1{font-size:20px;letter-spacing:-.3px;margin:0}
+body[data-page="astro"] .heading .eyebrow{font-size:10px;margin-bottom:3px}
+body[data-page="astro"] .heading #status{font-size:11px}
+body[data-page="astro"] .controls{gap:8px 12px}
+body[data-page="astro"] .metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}
+body[data-page="astro"] .metrics article{min-height:0;padding:8px 12px}
+body[data-page="astro"] .metrics small{display:block;margin:0;font-size:10px;grid-column:auto;grid-row:auto}
+body[data-page="astro"] .metrics strong{font-size:20px;margin:2px 0 0;grid-column:auto;grid-row:auto}
+body[data-page="astro"] .metrics span{font-size:10px}
+body[data-page="astro"] .workspace{padding:0;overflow:hidden}
+body[data-page="astro"] .workspace>#tabs{height:auto;min-height:36px;display:flex;gap:0;align-items:stretch;flex-wrap:wrap;padding:0 10px;border-bottom:1px solid var(--line)}
+body[data-page="astro"] .workspace>#tabs button{border:0;border-radius:0;background:transparent;color:var(--muted);padding:8px 10px;font-size:11px}
+body[data-page="astro"] .workspace>#tabs button.active{color:var(--green);border-bottom:2px solid var(--green)}
+body[data-page="astro"] .workspace .toolbar{padding:8px 10px;gap:8px}
+body[data-page="astro"] .workspace .tablewrap{max-height:calc(100vh - 305px);min-height:160px}
+body[data-page="astro"] .workspace table{white-space:normal;font-size:12px;line-height:1.35}
+body[data-page="astro"] .workspace th,body[data-page="astro"] .workspace td{padding:6px 5px;text-align:left}
+body[data-page="astro"] #calendarview #events{width:min(100%,1680px);min-width:1100px;table-layout:auto}
+body[data-page="astro"] .workspace th{position:sticky;top:0;z-index:1}
+body[data-page="astro"] .workspace .metrics{margin:8px 0}
+body[data-page="astro"] .workspace pre{margin:8px;background:var(--field);color:inherit;border:1px solid var(--line);border-radius:5px}
+body[data-page="astro"] .pill{display:inline-block;border-radius:5px;padding:3px 7px;font-size:10px}
+body[data-page="astro"] .history-link{color:var(--green)}
+body[data-page="astro"] tr.today-row td{background:color-mix(in srgb,#f7c83d 18%,var(--surface))!important;color:inherit}
+body[data-page="astro"] .focus-date-tag{display:inline-block;margin-left:5px;padding:2px 6px;border-radius:10px;background:color-mix(in srgb,#f7c83d 28%,var(--surface));color:var(--text);font-size:10px;font-weight:700;white-space:nowrap}
+body[data-page="astro"] .focus-timing-panel{margin-top:14px;padding:12px}
+body[data-page="astro"] .focus-timing-panel h2{margin:0;font-size:16px}
+body[data-page="astro"] .focus-timing-panel .toolbar .actions{display:flex;align-items:center;gap:8px}
+body[data-page="astro"] #focusTimingSubtitle{font-size:11px}
+body[data-page="astro"] .focus-timing-panel .tablewrap{max-height:340px;overflow:auto}
+body[data-page="astro"] #focusTimings{min-width:720px}
+body[data-page="astro"] .rashi-lookup-outcome{display:inline-block;margin:0 0 0 6px;font-weight:600;font-size:10px;color:var(--muted,#526174);vertical-align:middle;white-space:normal}
+/* Slightly larger type for comfortable reading in the calendar and candle tables. */
+body[data-page="astro"] .workspace table{font-size:13px}
+body[data-page="astro"] .workspace .pill{font-size:11px;padding:4px 8px}
+body[data-page="astro"] .workspace>#tabs button{font-size:12px}
+body[data-page="astro"] .rashi-lookup-outcome{font-size:12px}
+body[data-page="astro"] .focus-date-tag{font-size:11px}
+body[data-page="astro"] .metrics small,body[data-page="astro"] .metrics span{font-size:11px}
+body[data-page="astro"] .astro-quick-reference{font-size:13px}
+body[data-page="astro"] .focus-timing-panel h2{font-size:17px}
+@media(max-width:700px){body[data-page="astro"] .metrics{grid-template-columns:1fr}body[data-page="astro"] .workspace .tablewrap{max-height:calc(100vh - 360px)}body[data-page="astro"] .workspace>#tabs{overflow-x:auto;flex-wrap:nowrap}}
+
+/* Keep calendar filters on a compact row like the other dashboard controls. */
+body[data-page="astro"] #calendarview>.toolbar{align-items:center;justify-content:space-between}
+body[data-page="astro"] #calendarview .filters{display:flex;align-items:flex-end;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-left:auto}
+body[data-page="astro"] #calendarview .filters label{flex:0 0 auto;min-width:0}
+body[data-page="astro"] #calendarview .filters label:nth-child(1) select{width:132px}
+body[data-page="astro"] #calendarview .filters label:nth-child(2) select{width:116px}
+body[data-page="astro"] #calendarview .filters label:nth-child(3) select{width:92px}
+body[data-page="astro"] #calendarview .filters label:nth-child(4) input{width:180px}
+body[data-page="astro"] #calendarview .filters button{align-self:flex-end}
+@media(max-width:900px){body[data-page="astro"] #calendarview>.toolbar{align-items:flex-start}body[data-page="astro"] #calendarview .filters{justify-content:flex-start;margin-left:0;width:100%}}
+@media(max-width:600px){body[data-page="astro"] #calendarview .filters label{flex:1 1 130px}body[data-page="astro"] #calendarview .filters label select,body[data-page="astro"] #calendarview .filters label input{width:100%!important}}
+
+/* Share the top overview row between calendar controls and summary metrics. */
+body[data-page="astro"] .astro-overview{display:grid;grid-template-columns:minmax(480px,auto) minmax(0,1fr);align-items:center;gap:18px;padding:8px 10px;margin-bottom:8px}
+body[data-page="astro"] .astro-calendar-controls{display:flex;align-items:flex-end;gap:8px 10px;flex-wrap:wrap}
+body[data-page="astro"] .astro-overview .metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0}
+body[data-page="astro"] .astro-overview .metrics article{margin:0;min-height:68px;padding:7px 10px}
+body[data-page="astro"] .astro-overview .metrics small{font-size:10px}
+body[data-page="astro"] .astro-overview .metrics strong{font-size:19px}
+body[data-page="astro"] .astro-overview .metrics span{font-size:10px}
+@media(max-width:1100px){body[data-page="astro"] .astro-overview{grid-template-columns:1fr;gap:8px}body[data-page="astro"] .astro-overview .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){body[data-page="astro"] .astro-overview .metrics{grid-template-columns:1fr}}
+
+/* Keep Daily Timing Candle controls grouped on one aligned row. */
+body[data-page="astro"] #timingview>.timing-toolbar{display:flex;align-items:flex-end;justify-content:flex-start;gap:8px}
+body[data-page="astro"] #timingview .timing-actions{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+body[data-page="astro"] #timingview .timing-actions>button{align-self:flex-end}
+body[data-page="astro"] #timingview .timing-results-toolbar{display:flex;align-items:flex-end;justify-content:flex-start;gap:12px}
+body[data-page="astro"] #timingview .timing-results-actions{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-left:auto}
+body[data-page="astro"] #timingview .timing-results-actions label{margin:0}
+@media(max-width:620px){body[data-page="astro"] #timingview .timing-results-toolbar{align-items:flex-start;flex-direction:column}body[data-page="astro"] #timingview .timing-results-actions{margin-left:0}}
+
+body[data-page="astro"] #bias{font-size:12px;line-height:normal}
+body[data-page="astro"] .papa-hover-tooltip{position:fixed;z-index:10000;max-width:min(420px,calc(100vw - 24px));padding:10px 12px;border:1px solid #60758a;border-radius:7px;background:#101721;color:#f3f6fa;box-shadow:0 6px 20px #0006;font-size:12px;line-height:1.5;white-space:pre-line;pointer-events:auto;display:flex;flex-direction:column;gap:8px}
+body[data-page="astro"] .papa-tip-copy{align-self:flex-end;padding:4px 8px;font-size:11px}
+:root[data-theme="light"] body[data-page="astro"] .papa-hover-tooltip{background:#fff;color:#172536;border-color:#aebdce;box-shadow:0 6px 20px #17253630}
+body[data-page="astro"] #events .event[data-papa-tip],body[data-page="astro"] #events td [data-papa-tip]{cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
+body[data-page="astro"] .astro-quick-reference{display:grid;gap:8px;margin:10px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--field);font-size:12px;color:var(--text)}
+body[data-page="astro"] .astro-quick-reference .quick-title{color:var(--muted);font-weight:700}
+body[data-page="astro"] .astro-quick-reference .quick-row{display:flex;align-items:baseline;gap:5px 18px;flex-wrap:wrap}
+body[data-page="astro"] .astro-quick-reference .quick-row b,body[data-page="astro"] .astro-quick-reference .quick-section>b{color:var(--text);font-weight:700}
+body[data-page="astro"] .astro-quick-reference .quick-section{display:grid;gap:3px}
+@media(max-width:760px){body[data-page="astro"] .astro-quick-reference .quick-row{display:grid;grid-template-columns:max-content 1fr;gap:4px 10px}}

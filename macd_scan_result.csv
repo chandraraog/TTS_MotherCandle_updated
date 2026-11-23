@@ -1,0 +1,9 @@
+symbol,price,side,count,chain,not_yet_aligned,waiting_state,category,M,W,D,4H,1H,15m,5m
+NSE:NIFTY50-INDEX,25044.65,BULL,4,M > W > D > 4H,1H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-
+NSE:NIFTYBANK-INDEX,59741.25,BULL,4,M > W > D > 4H,1H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-
+NSE:INDIGO-EQ,5430.0,BULL,4,M > W > D > 4H,1H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-
+NSE:BHARTIARTL-EQ,2072.1,BULL,3,M > W > D,4H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-,-
+NSE:DRREDDY-EQ,1385.0,BULL,3,M > W > D,4H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-,-
+NSE:ETERNAL-EQ,363.45,BULL,3,M > W > D,4H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-,-
+NSE:JSWSTEEL-EQ,1347.0,BULL,3,M > W > D,4H,Weakening,PULLBACK,Strong Bull,Strong Bull,Strong Bull,Weakening,-,-,-
+NSE:KOTAKBANK-EQ,447.95,BULL,3,M > W > D,4H,-,PULLBACK,Strong Bull,Strong Bull,Strong Bull,-,-,-,-

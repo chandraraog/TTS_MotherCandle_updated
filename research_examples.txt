@@ -1,0 +1,29 @@
+# 42->21 Universal Research Examples
+
+# NIFTY 5m reference
+python cycle_42_21_any_timeframe.py --symbol NSE:NIFTY50-INDEX --timeframe 5
+
+# BANKNIFTY 5m
+python cycle_42_21_any_timeframe.py --symbol NSE:NIFTYBANK-INDEX --timeframe 5
+
+# NIFTY 15m
+python cycle_42_21_any_timeframe.py --symbol NSE:NIFTY50-INDEX --timeframe 15
+
+# RELIANCE 5m
+python cycle_42_21_any_timeframe.py --symbol NSE:RELIANCE-EQ --timeframe 5
+
+# HDFCBANK 15m
+python cycle_42_21_any_timeframe.py --symbol NSE:HDFCBANK-EQ --timeframe 15
+
+# Exact-only research
+python cycle_42_21_any_timeframe.py --symbol NSE:NIFTY50-INDEX --timeframe 5 --tolerance 0
+
+# Near-match research
+python cycle_42_21_any_timeframe.py --symbol NSE:NIFTY50-INDEX --timeframe 5 --tolerance 2
+
+# Optional Telegram alert
+python cycle_42_21_any_timeframe.py --symbol NSE:RELIANCE-EQ --timeframe 5 --alert
+
+
+
+python cycle_42_21_any_timeframe.py --symbol MCX:SILVER26SEPFUT --timeframe 5 --tolerance 0

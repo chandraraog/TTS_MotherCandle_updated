@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Money · Chandra Market Desk</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script><style id="money-ui">
+/* Option Money Bias look: compact cards, system font, pill tags. Layered over /style.css; IDs and markup untouched so /app.js keeps working. */
+body[data-page="money"]{
+  --mb-bg:#14161a;--mb-card:#1c1f25;--mb-text:#eceef2;--mb-muted:#9aa3b2;--mb-line:#2c313a;--mb-accent:#7ea2ff;
+  --mb-bull:#4cd3a0;--mb-bear:#ff8a7a;--mb-neu:#f0c64a;--mb-bullbg:#12342a;--mb-bearbg:#3b1f1b;--mb-neubg:#3a3112;
+  font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+html[data-theme="light"] body[data-page="money"],html.light body[data-page="money"],html.theme-light body[data-page="money"],
+body.light[data-page="money"],body.theme-light[data-page="money"],body[data-theme="light"][data-page="money"]{
+  --mb-bg:#f6f7f9;--mb-card:#fff;--mb-text:#1a1d23;--mb-muted:#667085;--mb-line:#e3e6eb;--mb-accent:#2457d6;
+  --mb-bull:#13795b;--mb-bear:#c0392b;--mb-neu:#8a6d00;--mb-bullbg:#e4f5ee;--mb-bearbg:#fbe9e7;--mb-neubg:#fff4cc;
+}
+body[data-page="money"] main{max-width:860px;margin:0 auto;padding:10px 16px 30px}
+
+/* Heading: one compact line, hint inline like the reference */
+body[data-page="money"] .heading{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px 16px;margin:0 0 10px}
+body[data-page="money"] .heading .eyebrow{display:none}
+body[data-page="money"] .heading h1{font-size:17px;margin:0 0 2px;font-weight:700}
+body[data-page="money"] .heading .muted{font-size:12px;color:var(--mb-muted);margin:0}
+
+/* Cards */
+body[data-page="money"] .panel{background:var(--mb-card);border:1px solid var(--mb-line);border-radius:12px;padding:10px 12px;margin-bottom:10px;box-shadow:none}
+body[data-page="money"] .money-settings{padding:10px 12px}
+body[data-page="money"] .controls{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end}
+
+/* Form controls */
+body[data-page="money"] main label{display:block;font-size:12px;color:var(--mb-muted);margin-bottom:4px}
+body[data-page="money"] main label.check{display:inline-flex;align-items:center;gap:6px;margin:0;color:var(--mb-text);font-size:13px}
+body[data-page="money"] main input:not([type=checkbox]),body[data-page="money"] main select{
+  background:var(--mb-bg);color:var(--mb-text);border:1px solid var(--mb-line);border-radius:8px;padding:6px 9px;font-size:14px;width:auto}
+body[data-page="money"] main input[type=number]{width:80px}
+body[data-page="money"] main input[type=search]{width:130px}
+body[data-page="money"] main button{background:var(--mb-bg);color:var(--mb-text);border:1px solid var(--mb-line);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+body[data-page="money"] main button:hover{border-color:var(--mb-accent)}
+body[data-page="money"] main button.primary{background:var(--mb-accent);border-color:var(--mb-accent);color:#fff}
+body[data-page="money"] .money-heading-actions{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end}
+body[data-page="money"] .telegram-icon{width:14px;height:14px;vertical-align:-2px}
+body[data-page="money"] .money-presets{display:flex;gap:6px}
+body[data-page="money"] .money-inline{display:flex;gap:6px;align-items:center}
+body[data-page="money"] .money-header-filters{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:flex-end}
+body[data-page="money"] .progress,body[data-page="money"] .notice{font-size:13px;color:var(--mb-muted)}
+body[data-page="money"] .notice{background:var(--mb-neubg);color:var(--mb-neu);border:1px solid var(--mb-neu);border-radius:12px;padding:8px 12px;margin-bottom:10px;font-weight:600}
+body[data-page="money"] .notice.error{background:var(--mb-bearbg);color:var(--mb-bear);border-color:var(--mb-bear)}
+
+/* Summary: two cards side by side, small label over bold value */
+body[data-page="money"] .metrics.money-summary{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+body[data-page="money"] .money-summary .panel{flex:1 1 300px;margin:0;display:flex;flex-direction:column;gap:2px}
+body[data-page="money"] .money-summary .panel>p{font-size:12px;color:var(--mb-muted);margin:0}
+body[data-page="money"] .money-summary .panel>strong{font-size:17px;font-weight:700}
+body[data-page="money"] .money-summary-line{font-size:13px;color:var(--mb-muted)}
+body[data-page="money"] .money-badge{display:inline-block;align-self:flex-start;padding:3px 10px;border-radius:999px;font-weight:600;font-size:13px;background:var(--mb-neubg);color:var(--mb-neu)}
+
+/* Table card */
+body[data-page="money"] .panel.data .toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 16px;margin-bottom:8px}
+body[data-page="money"] .panel.data h2{font-size:15px;margin:0}
+body[data-page="money"] .panel.data .muted{font-size:12px;color:var(--mb-muted);margin:0}
+body[data-page="money"] .tablewrap{overflow-x:auto}
+body[data-page="money"] table{border-collapse:collapse;width:100%;min-width:560px}
+body[data-page="money"] th,body[data-page="money"] td{padding:9px 8px;text-align:right;border-bottom:1px solid var(--mb-line);white-space:nowrap;background:transparent}
+body[data-page="money"] th:first-child,body[data-page="money"] td:first-child{text-align:left}
+body[data-page="money"] th:last-child,body[data-page="money"] td:last-child{text-align:center}
+body[data-page="money"] th{font-size:12px;color:var(--mb-muted);font-weight:600}
+body[data-page="money"] tbody tr:hover td{background:color-mix(in srgb,var(--mb-accent) 8%,transparent)}
+body[data-page="money"] .empty{color:var(--mb-muted);font-size:13px;padding:6px 0}
+body[data-page="money"] footer{color:var(--mb-muted);font-size:12px}
+
+/* Compact banners: header, logo, notices and empty status lines must never take extra space */
+body[data-page="money"] [hidden]{display:none!important}
+body[data-page="money"] header{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding:6px 16px;min-height:0}
+body[data-page="money"] header .brand{display:flex;align-items:center;gap:8px;line-height:1.1}
+body[data-page="money"] header .brand-mark{width:30px;height:30px;flex:none}
+body[data-page="money"] header .brand-name{display:flex;flex-direction:column;font-size:12px;line-height:1.1}
+body[data-page="money"] header nav{display:flex;gap:4px 12px;flex-wrap:wrap}
+body[data-page="money"] header button#theme{padding:4px 10px;font-size:12px}
+body[data-page="money"] .pill{padding:2px 10px;font-size:12px}
+body[data-page="money"] .progress:empty{display:none}
+body[data-page="money"] .progress{margin:0 0 8px}
+body[data-page="money"] .notice{margin:0 0 8px;padding:6px 12px}
+body[data-page="money"] svg.telegram-icon{width:14px;height:14px;max-width:14px;max-height:14px;flex:none}
+body[data-page="money"] .money-summary .panel{min-height:0;height:auto}
+body[data-page="money"] .heading{margin-bottom:8px}
+</style>
+</head>
+<body data-page="money"><header><a class="brand" href="/" aria-label="Chandra Trend Engine home"><svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M80 25 A36 36 0 1 0 80 75" fill="none" stroke="white" stroke-width="8"/><path d="M48 5V22 M6 50H23 M48 78V95" stroke="white" stroke-width="4"/><path d="M29 65L48 46L63 60L87 31" fill="none" stroke="#f7c83d" stroke-width="7" stroke-linejoin="miter"/><path d="M75 29L94 24L89 44Z" fill="#f7c83d"/></svg><span class="brand-name"><span>CHANDRA</span><span>TREND ENGINE</span></span></a><nav><a class="active" href="money.html">Money</a><a href="oi.html">Open interest</a><a href="macd.html">Momentum Scanner</a></nav><button id="theme" type="button" aria-label="Switch to white theme">White theme</button><span id="mode" class="pill">Connecting</span></header>
+<main><div class="heading"><div><p class="eyebrow">OPTIONS / INTRADAY</p><h1>Option Money Bias</h1><p class="muted">CE money more → Bearish · PE money more → Bullish</p></div><div class="actions money-heading-actions"><label class="check"><input id="moneyAlertEnabled" type="checkbox" title="Enable automatic Money alerts on Telegram"> <svg class="telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5 11.5 18.4 6.3c.6-.2 1 .1.8.9l-2.3 10.7c-.1.7-.6.9-1.2.5l-3.5-2.6-1.7 1.6c-.2.2-.3.3-.6.3l.3-3.6 6.5-5.9c.3-.3-.1-.4-.4-.2l-8 5-3.4-1.1c-.7-.2-.7-.7.1-1z" fill="white"/></svg> Auto alerts</label><label>Alert range<select id="moneyNear" title="Telegram only: ATM ±2 or ±3 strike levels. Does not filter the table."><option value="2">±2 strikes</option><option value="3" selected>±3 strikes</option></select></label><label>Strike step<input id="moneyStep" type="number" min="0.01" max="10000" step="any" value="100"></label><button id="sendMoneyNow" type="button" title="Send the current Money table image to Telegram"><svg class="telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5 11.5 18.4 6.3c.6-.2 1 .1.8.9l-2.3 10.7c-.1.7-.6.9-1.2.5l-3.5-2.6-1.7 1.6c-.2.2-.3.3-.6.3l.3-3.6 6.5-5.9c.3-.3-.1-.4-.4-.2l-8 5-3.4-1.1c-.7-.2-.7-.7.1-1z" fill="white"/></svg>Send Telegram</button><button id="refresh" class="primary">Collect now</button></div></div>
+
+<p id="progress" class="progress" role="status"></p><div id="error" class="notice error" hidden></div><div id="message" class="notice" hidden></div>
+<section class="settings-panel panel money-settings"><form id="settings" class="controls"><label>Underlying<select id="instrumentPreset"><option value="NSE:NIFTY50-INDEX">NIFTY 50</option><option value="NSE:NIFTYBANK-INDEX">BANK NIFTY</option><option value="NSE:FINNIFTY-INDEX">FIN NIFTY</option><option value="NSE:MIDCPNIFTY-INDEX">MIDCAP NIFTY</option><option value="NSE:NIFTYNXT50-INDEX">NIFTY NEXT 50</option><option value="BSE:SENSEX-INDEX">BSE SENSEX</option><option value="MCX:NATURALGAS">MCX Natural Gas</option><option value="NSE:SBIN-EQ">SBI</option><option value="NSE:RELIANCE-EQ">Reliance</option><option value="custom">Custom instrument…</option></select></label><label id="customInstrumentField" hidden>Custom FYERS symbol<input id="symbol" value="NSE:NIFTY50-INDEX" placeholder="e.g. NSE:TCS-EQ" required autocomplete="off"></label><label>Expiry<select id="expiry"><option value="">Nearest expiry</option></select></label><label hidden>Fetch strikes<input id="strikes" type="number" min="1" max="50" value="5"></label><label>Refresh every<select id="interval"><option value="0">Off</option><option value="60">1 min</option><option value="180">3 min</option><option value="300" selected>5 min</option><option value="900">15 min</option></select></label><button type="submit">Save settings</button></form></section>
+<div class="metrics money-summary"><article class="panel"><p>Spot / ATM</p><strong><span id="spot">—</span><span id="atmStrike"></span></strong><small id="expiryText" hidden>Waiting for saved data</small><div id="atmSummary" class="money-summary-line"></div></article><article class="panel"><p>Overall · ₹ lakh</p><strong>CE <span id="ce">—</span> vs PE <span id="pe">—</span></strong><span id="bias" class="money-badge">—</span><small id="biasNote" hidden></small></article></div>
+<section class="panel data"><div class="toolbar"><div><h2>Money by strike</h2><p id="freshness" class="muted">Waiting for data…</p></div><div class="money-header-filters">
+<div class="money-control-group"><label for="moneyThreshold">Alert / gap %</label><div class="money-inline"><input id="moneyThreshold" type="number" min="0.1" max="1000" step="any" value="20" aria-label="Alert and difference percentage"><div class="money-presets" role="group" aria-label="Percentage presets"><button data-diff="10">10</button><button data-diff="15">15</button><button data-diff="20">20</button><button data-diff="25">25</button></div></div></div>
+<div class="money-control-group"><label for="moneyTop">Top strikes</label><div class="money-inline"><div class="money-presets" role="group" aria-label="Top strikes presets"><button data-top="3">3</button><button data-top="5">5</button><button data-top="0">All</button></div><input id="moneyTop" type="number" min="0" step="1" value="0" aria-label="Custom top strikes count" title="Custom count; 0 shows all"></div></div>
+
+
+
+<select id="moneyBase" hidden aria-hidden="true"><option value="max">Larger side</option></select>
+</div><div class="actions"><label class="compact">View<select id="columns"><option value="paired">CE / PE</option><option value="all">Raw contracts</option></select></label><label class="compact">Snapshot<select id="history"><option value="">Latest</option></select></label><label class="compact">Search strike<input id="filter" type="search" placeholder="e.g. 25000"></label><button id="export">Export CSV</button></div></div><div class="tablewrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><div id="empty" class="empty">Your first snapshot will appear here.<br>Use Collect now outside market hours, or start with --demo.</div></section>
+
+<footer>Local data workspace · Times shown in Asia/Kolkata · Browser refresh does not request new broker data</footer></main></body></html>

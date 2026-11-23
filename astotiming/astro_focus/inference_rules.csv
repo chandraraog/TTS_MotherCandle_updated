@@ -1,0 +1,27 @@
+Inference,Market,Hypothesis,Condition,Interpretation
+Amavasya on Tuesday,Index,Bullish,Amavasya occurs on Tuesday,Amavasya weekday rule
+Ekadashi on Friday,Index,Bearish,Ekadashi occurs on Friday,Ekadashi weekday rule
+Mars Retrograde,Index; Gold,Bullish,Mars is retrograde,Mars retrograde
+Jupiter Retrograde,Index,Bullish,Jupiter is retrograde,Jupiter retrograde
+Mercury Retrograde,Index,Bearish,Mercury is retrograde,Mercury retrograde
+Saturn Retrograde,Index,Bearish,Saturn is retrograde,Saturn retrograde
+Jupiter in Pisces or Sagittarius,Index,Bullish,Jupiter transits Pisces or Sagittarius,Jupiter sign transit
+Venus Retrograde,Index,Big top or big bottom possible,Venus is retrograde,Potential turning point
+Uranus–Venus conjunction,Index,Big top or big bottom possible,Uranus and Venus conjunct,Potential turning point
+Saturn + Mars both retrograde,Index,Bullish,Saturn and Mars retrograde periods overlap,Combined retrograde condition
+Saturn + Mercury both retrograde,Index,Bullish,Saturn and Mercury retrograde periods overlap,Combined retrograde condition
+Saturn + Venus both retrograde,Index,High Bullish,Saturn and Venus retrograde periods overlap,Combined retrograde condition
+Saturn + Venus + Mercury retrograde,Index,Extreme Bullish,All three retrograde periods overlap,Combined retrograde condition
+Saturn + Mars + Mercury + Jupiter retrograde,Index,Extreme Bull Bull,All four retrograde periods overlap,Combined retrograde condition
+Lunar eclipse on Wednesday,Gold,Major bullish,Lunar eclipse occurs on Wednesday,Gold-specific hypothesis
+Jupiter in Aries,Gold,Bearish,Jupiter transits Aries,Gold-specific hypothesis
+Saturn or Mercury in Gemini,Gold,Bearish,Saturn or Mercury transits Gemini,Gold-specific hypothesis
+Venus + Mars same sign,Silver,Bullish,Venus and Mars occupy the same sign,Silver-specific hypothesis
+Sun + Mars same sign,Silver,Bullish,Sun and Mars occupy the same sign,Silver-specific hypothesis
+Mars in Aquarius,Silver,Bullish,Mars transits Aquarius,Silver-specific hypothesis
+Saturn in Aries or Aquarius,Silver,Bullish,Saturn transits Aries or Aquarius,Silver-specific hypothesis
+Venus in Leo or Libra,Silver,Bearish,Venus transits Leo or Libra,Silver-specific hypothesis
+Mercury in Aries or Virgo,Silver,Bearish,Mercury transits Aries or Virgo,Silver-specific hypothesis
+Amavasya on Monday,Silver,Bearish,Amavasya occurs on Monday,Silver-specific hypothesis
+Saturn turns direct,Silver,Bearish,Saturn changes from retrograde to direct,Silver-specific hypothesis
+Mercury + Venus in Pisces,Silver,Bearish,Mercury and Venus both transit Pisces,Silver-specific hypothesis

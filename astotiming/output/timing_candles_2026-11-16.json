@@ -1,0 +1,32 @@
+[
+  {
+    "date": "2026-11-16",
+    "time": "01:57",
+    "planet1": "Moon",
+    "planet2": "Mercury",
+    "aspect": "Square",
+    "degree": 90,
+    "bias": "Bearish",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-11-16",
+    "time": "04:58",
+    "planet1": "Moon",
+    "planet2": "Lilith",
+    "aspect": "Semi Sextile",
+    "degree": 30,
+    "bias": "Dwidwadasha",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  },
+  {
+    "date": "2026-11-16",
+    "time": "11:53",
+    "planet1": "Mars",
+    "planet2": "Jupiter",
+    "aspect": "Conjunction",
+    "degree": 0,
+    "bias": "Context dependent",
+    "source": "https://www.prokerala.com/astrology/planetary-aspects.html"
+  }
+]

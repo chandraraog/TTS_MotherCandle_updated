@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Option Money Bias · Chandra Trend Engine</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#14161a;--card:#1c1f25;--text:#eceef2;--muted:#9aa3b2;--line:#2c313a;--bull:#4cd3a0;--bear:#ff8a7a;--neu:#f0c64a;--bullbg:#12342a;--bearbg:#3b1f1b;--neubg:#3a3112;--accent:#7ea2ff;--up:#7ea2ff;--dn:#ffb066}
+:root[data-theme="light"]{--bg:#f6f7f9;--card:#fff;--text:#1a1d23;--muted:#667085;--line:#e3e6eb;--bull:#13795b;--bear:#c0392b;--neu:#8a6d00;--bullbg:#e4f5ee;--bearbg:#fbe9e7;--neubg:#fff4cc;--accent:#2457d6;--up:#1a6fd6;--dn:#b45f06}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;align-items:center;gap:16px;padding:12px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{font-weight:700;letter-spacing:1px;font-size:16px;color:var(--text);text-decoration:none}
+main{max-width:1080px;margin:0 auto;padding:14px 16px 30px}
+.heading{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px 16px;margin:0 0 12px}
+h1{font-size:21px;margin:0 0 4px;font-weight:700}
+.sub{color:var(--muted);margin:0;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+input[type=number],select,input[type=search]{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px}
+input[type=number]{width:84px}
+input[type=search]{width:150px}
+select{width:auto}
+input[type=file]{font-size:13px;max-width:230px}
+button{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:13px}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.presets{display:flex;gap:4px}
+.presets button{padding:6px 9px;font-size:12px}
+.summary{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.big{font-size:18px;font-weight:700}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:600;font-size:13px}
+.Bullish{background:var(--bullbg);color:var(--bull)}
+.Bearish{background:var(--bearbg);color:var(--bear)}
+.Neutral{background:var(--neubg);color:var(--neu)}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:650px}
+th,td{padding:10px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th:last-child,td:last-child{text-align:center}
+th{font-size:12px;color:var(--muted);font-weight:600}
+.msg{color:var(--muted);font-size:13px;padding:10px 0}
+.rule{font-size:12px;color:var(--muted)}
+tr.atm td{background:color-mix(in srgb,var(--accent) 15%,transparent)}
+.dlt{font-size:11px;font-weight:600}.dlt.up{color:var(--up)}.dlt.dn{color:var(--dn)}
+tr.flipped td{background:color-mix(in srgb,var(--neu) 20%,transparent)}
+@keyframes blink{50%{opacity:.35}}
+tr.flipped{animation:blink 1s ease-in-out 6}
+.tag.flip{background:var(--neu);color:var(--bg)}
+#alert{padding:10px 14px;border-radius:12px;margin-bottom:12px;font-weight:600;background:var(--neubg);color:var(--neu);border:1px solid var(--neu);cursor:pointer;animation:blink 1s ease-in-out 6}
+.ev{padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;display:flex;gap:10px}.ev time{color:var(--muted);min-width:76px}
+details.more{flex-basis:100%}
+details.more summary{cursor:pointer;font-size:13px;color:var(--muted)}
+.pair{display:flex;gap:12px;flex-wrap:wrap}
+.pair .card{flex:1 1 300px;margin-bottom:12px}
+td.hit{color:var(--accent);font-weight:700}
+tr td.tp{background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#">CHANDRA TREND ENGINE</a>
+  <button id="theme" type="button" style="margin-left:auto">🌓 Auto</button>
+</header>
+<main>
+<div class="heading">
+  <div>
+    <p class="rule" style="text-transform:uppercase;letter-spacing:1px;margin:0 0 2px">Options / Intraday</p>
+    <h1>Option Money Bias <span id="exp" class="tag Neutral" style="display:none"></span></h1>
+    <p class="sub">CE money more → Bearish · PE money more → Bullish</p>
+  </div>
+  <div>
+    <button id="refresh" class="primary">Reload now</button>
+  </div>
+</div>
+
+<div class="card controls">
+  <div><label>Open CSV/Excel file</label><button id="pick">Choose file</button></div>
+  <div><label for="every">Auto reload every</label><select id="every"><option value="0">Off</option><option value="1">1 min</option><option value="3">3 min</option><option value="5" selected>5 min</option><option value="15">15 min</option></select></div>
+  <div><label for="th">Min difference %</label><input type="number" id="th" value="20" min="0" step="1"></div>
+  <div class="presets"><button data-p="10">10</button><button data-p="15">15</button><button data-p="20">20</button><button data-p="25">25</button></div>
+  <div><label for="topn">Top money strikes (0 = all)</label><input type="number" id="topn" value="0" min="0"></div>
+  <div class="presets"><button data-t="3">Top 3</button><button data-t="5">Top 5</button><button data-t="0">All</button></div>
+  <div><label for="filter">Search strike</label><input type="search" id="filter" placeholder="e.g. 25000"></div>
+
+  <details class="more"><summary>⚙ Advanced Settings</summary>
+    <div class="controls" style="margin-top:10px">
+      <div><label for="file">One-time upload</label><input type="file" id="file" accept=".xls,.xlsx,.csv"></div>
+      <div><label for="base">Difference % vs</label><select id="base"><option value="max">Larger side</option><option value="min">Smaller side</option></select></div>
+      <div><label for="step">Strike step</label><input type="number" id="step" value="100" min="1"></div>
+      <div><label for="near">Show ATM ± strikes (0 = all)</label><input type="number" id="near" value="5" min="0"></div>
+      <div><label><input type="checkbox" id="snd" checked> Sound alert</label></div>
+      <button id="sample">Load sample data</button>
+    </div>
+  </details>
+  <div class="rule" style="flex-basis:100%"><span id="status">Click “Choose file” to upload your data sheet (needs StrikePrice, OpType, Money columns).</span> <span id="next"></span></div>
+</div>
+
+<div id="alert" hidden></div>
+
+<div class="pair">
+  <div class="card" id="spotcard" hidden>
+    <div class="summary">
+      <div><div class="rule">NIFTY spot → ATM strike</div><div class="big" id="spot"></div></div>
+      <div id="atmsum"></div>
+    </div>
+  </div>
+
+  <div class="card" id="sumcard" hidden>
+    <div class="summary">
+      <div><div class="rule">Overall (strikes shown)</div><div class="big" id="tot"></div></div>
+      <div id="totsig"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card wrap"><div id="out" class="msg">Upload your file or click “Load sample data” to view the option money bias analysis.</div></div>
+<div class="card"><div class="rule">Change log (flips and view changes since tracking started)</div><div id="log" class="msg">No changes yet.</div></div>
+<p class="rule">BEP: CE = Strike + ATP, PE = Strike − ATP (blue = spot already beyond it). Diff % = |CE − PE| ÷ larger (or smaller) side × 100. Below the minimum % → Neutral.</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+let rows=[],spot=null;
+const $=id=>document.getElementById(id);
+let last=null,base=null,lastSpot=null,lastView={},events=[],flashNow=false;
+const lead=x=>x.pe>x.ce?'PE':(x.ce>x.pe?'CE':'=');
+const dl=x=>x?`<div class="dlt ${x>0?'up':'dn'}">${x>0?'▲':'▼'} ${Math.round(Math.abs(x)).toLocaleString('en-IN')}</div>`:'';
+function logEv(){$('log').innerHTML=events.length?events.map(e=>`<div class="ev"><time>${e.t}</time><span>${e.x}</span></div>`).join(''):'No changes yet.'}
+function resetHist(){last=base=null;lastSpot=null;lastView={};events=[];logEv();$('alert').hidden=true}
+function beep(){if(!$('snd').checked)return;try{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.15;o.start();o.stop(c.currentTime+.4)}catch(e){}}
+function notify(x){
+  events.unshift({t:new Date().toLocaleTimeString(),x});events=events.slice(0,40);logEv();
+  const a=$('alert');a.textContent='🔔 '+x;a.hidden=false;a.style.animation='none';void a.offsetWidth;a.style.animation='';
+  document.title='🔔 '+x;beep();
+}
+$('alert').onclick=()=>{$('alert').hidden=true;document.title='Option Money Bias'};
+function track(){
+  const now={};rows.forEach(r=>now[r.strike]={ce:r.ce,pe:r.pe});
+  let ch=false;
+  if(last){
+    ch=spot!==lastSpot;
+    for(const s in now){const a=last[s],b=now[s];if(!a||a.ce!==b.ce||a.pe!==b.pe)ch=true}
+    if(ch){
+      base=last;
+      for(const s in now){const a=base[s],b=now[s];
+        if(a&&lead(a)!=='='&&lead(b)!=='='&&lead(a)!==lead(b))notify(`${s}: money flipped ${lead(a)} → ${lead(b)} · ${lead(b)==='PE'?'Bullish':'Bearish'}`)}
+    }
+  }
+  last=now;lastSpot=spot;flashNow=ch;
+}
+function expTxt(v){
+  const M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  let d=null;
+  if(typeof v==='number'&&v>30000)d=new Date(Math.round((v-25569)*864e5));
+  else if(v instanceof Date)d=new Date(Date.UTC(v.getFullYear(),v.getMonth(),v.getDate()));
+  else{
+    const p=String(v).trim().split(/[- /]+/);
+    if(p.length===3){let mo=M.indexOf(p[1].slice(0,3).toUpperCase());if(mo<0)mo=parseInt(p[1])-1;d=new Date(Date.UTC(+p[2],mo,+p[0]))}
+  }
+  if(!d||isNaN(d))return String(v);
+  const n=new Date(),dte=Math.round((d-Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()))/864e5);
+  const s=`${String(d.getUTCDate()).padStart(2,'0')}-${M[d.getUTCMonth()]}-${d.getUTCFullYear()}`;
+  return s+(dte===0?' · expires today':dte>0?` · ${dte} day${dte>1?'s':''} left`:' · expired');
+}
+function showExp(list){
+  const e=$('exp');
+  if(!list.length){e.style.display='none';return}
+  e.style.display='';
+  e.textContent='Expiry '+list.map(expTxt).join(', ');
+}
+const bepC=r=>r.cl!=null?r.strike+r.cl:null,bepP=r=>r.pl!=null?r.strike-r.pl:null;
+const bc=(v,hit)=>`<td class="${hit?'hit':''}">${v==null?'–':v.toFixed(2)}</td>`;
+const TH=['auto','light','dark'];let ti=0;
+try{ti=Math.max(0,TH.indexOf(localStorage.getItem('mb-theme')))}catch(e){}
+function applyTheme(){
+  const t=TH[ti],R=document.documentElement;
+  if(t==='auto')R.removeAttribute('data-theme');else R.setAttribute('data-theme',t);
+  $('theme').textContent={auto:'🌓 Auto',light:'☀ Light',dark:'🌙 Dark'}[t];
+  try{localStorage.setItem('mb-theme',t)}catch(e){}
+}
+$('theme').onclick=()=>{ti=(ti+1)%3;applyTheme()};
+applyTheme();
+function checkViews(a,o,quiet){
+  if(!quiet){
+    if(lastView.a&&a&&lastView.a!==a)notify(`ATM view changed: ${lastView.a} → ${a}`);
+    if(lastView.o&&lastView.o!==o)notify(`Overall view changed: ${lastView.o} → ${o}`);
+  }
+  lastView={a,o};
+}
+const fmt=n=>Math.round(n).toLocaleString('en-IN');
+
+function load(json){
+  const m={};spot=null;const ex=new Set();
+  json.forEach(r=>{
+    const k={};
+    Object.keys(r).forEach(h=>k[h.trim().toLowerCase()]=r[h]);
+    const s=parseFloat(String(k['strikeprice']).replace(/,/g,''));
+    const t=String(k['optype']||'').trim().toUpperCase();
+    const v=parseFloat(String(k['money']).replace(/,/g,''));
+    const ltp=parseFloat(String(k['ltp']).replace(/,/g,''));
+    if((t==='CE'||t==='PE')&&k['expdate']!==''&&k['expdate']!=null)ex.add(k['expdate']);
+    if(t!=='CE'&&t!=='PE'&&!isNaN(ltp)&&ltp>0&&(isNaN(s)||s===0)){spot=ltp;return}
+    if(isNaN(s)||isNaN(v)||(t!=='CE'&&t!=='PE'))return;
+    m[s]=m[s]||{strike:s,ce:0,pe:0};
+    m[s][t.toLowerCase()]+=v;
+    const atp=parseFloat(String(k['atp']).replace(/,/g,''));
+    if(!isNaN(atp)&&atp>0)m[s][t==='CE'?'cl':'pl']=atp;
+  });
+  rows=Object.values(m).sort((a,b)=>b.strike-a.strike);track();showExp([...ex]);
+  render();
+}
+function judge(ce,pe){
+  const th=parseFloat($('th').value)||0;
+  const base=$('base').value==='max'?Math.max(ce,pe):Math.min(ce,pe);
+  const pct=base?Math.abs(pe-ce)/base*100:0;
+  const sig=pct<th||ce===pe?'Neutral':(pe>ce?'Bullish':'Bearish');
+  return{pct,sig};
+}
+function render(){
+  const fl=flashNow;flashNow=false;
+  if(!rows.length){$('out').innerHTML='No valid rows found. Check column names: StrikePrice, OpType, Money.';$('sumcard').hidden=true;$('spotcard').hidden=true;return}
+  let tc=0,tp=0,atm=null,tgt=null;
+  const step=parseFloat($('step').value)||50;
+  const f=rows.filter(r=>r.strike%step===0);
+  const list=f.length?f:rows;
+  let vis=list;
+  const query=$('filter').value.trim().toUpperCase();
+  if(query){vis=vis.filter(r=>String(r.strike).includes(query))}
+  if(spot!=null){
+    tgt=Math.round(spot/step)*step;
+    atm=list.reduce((a,b)=>Math.abs(b.strike-tgt)<Math.abs(a.strike-tgt)?b:a);
+    const n=parseInt($('near').value)||0;
+    if(n>0&&!query){const i=list.indexOf(atm);vis=list.slice(Math.max(0,i-n),i+n+1)}
+  }
+  const tn=parseInt($('topn').value)||0;let ceT=null,peT=null;
+  if(tn>0){
+    ceT=new Set([...vis].sort((a,b)=>b.ce-a.ce).slice(0,tn));
+    peT=new Set([...vis].sort((a,b)=>b.pe-a.pe).slice(0,tn));
+    vis=vis.filter(r=>ceT.has(r)||peT.has(r));
+  }
+  let h='<table><thead><tr><th>Strike</th><th>CE Money</th><th>PE Money</th><th>CE BEP</th><th>PE BEP</th><th>Diff %</th><th>View</th></tr></thead><tbody>';
+  vis.forEach(r=>{
+    tc+=r.ce;tp+=r.pe;
+    const j=judge(r.ce,r.pe);
+    const d=base&&base[r.strike],dc=d?r.ce-d.ce:0,dp=d?r.pe-d.pe:0,fp=!!d&&lead(d)!=='='&&lead(r)!=='='&&lead(d)!==lead(r);
+    h+=`<tr class="${r===atm?'atm':''} ${fp?'flipped':''}"><td>${r.strike}${r===atm?' <span class="tag Neutral">ATM</span>':''}${fp?` <span class="tag flip">FLIP → ${lead(r)}</span>`:''}</td><td class="${ceT&&ceT.has(r)?'tp ':''}${fl&&dc?(dc>0?'fu':'fd'):''}">${fmt(r.ce)}${dl(dc)}</td><td class="${peT&&peT.has(r)?'tp ':''}${fl&&dp?(dp>0?'fu':'fd'):''}">${fmt(r.pe)}${dl(dp)}</td>${bc(bepC(r),spot!=null&&bepC(r)!=null&&spot>=bepC(r))}${bc(bepP(r),spot!=null&&bepP(r)!=null&&spot<=bepP(r))}<td>${j.pct.toFixed(1)}%</td><td><span class="tag ${j.sig}">${j.sig}</span></td></tr>`;
+  });
+  $('out').innerHTML=h+'</tbody></table>';
+  const j=judge(tc,tp);
+  checkViews(atm?judge(atm.ce,atm.pe).sig:null,j.sig,!fl);
+  $('tot').textContent=`CE ${fmt(tc)}  vs  PE ${fmt(tp)}  (${j.pct.toFixed(1)}%)`;
+  $('totsig').innerHTML=`<span class="tag ${j.sig}">${j.sig}</span>`;
+  $('sumcard').hidden=false;
+  if(atm){
+    const a=judge(atm.ce,atm.pe);
+    $('spot').innerHTML=`Spot <b>${spot}</b> → ATM <b>${atm.strike}</b>`+(atm.strike!==tgt?` <span class="rule">(${tgt} not in sheet, nearest used)</span>`:'');
+    $('atmsum').innerHTML=`CE ${fmt(atm.ce)} vs PE ${fmt(atm.pe)} (${a.pct.toFixed(1)}%) <span class="tag ${a.sig}">${a.sig}</span>`;
+    $('spotcard').hidden=false;
+  }else $('spotcard').hidden=true;
+}
+let handle=null,timer=null,next=0;
+function parseBuf(buf){
+  const wb=XLSX.read(buf,{type:'array'});
+  load(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''}));
+}
+function stamp(t){$('status').textContent=t}
+function schedule(){
+  clearTimeout(timer);
+  const m=parseFloat($('every').value);
+  if(!handle||!m){next=0;return}
+  next=Date.now()+m*60000;
+  timer=setTimeout(reload,m*60000);
+}
+async function reload(){
+  if(!handle){stamp('Choose a file first (auto reload needs “Choose file”).');return}
+  try{
+    const f=await handle.getFile();
+    parseBuf(await f.arrayBuffer());
+    stamp('Last loaded '+new Date().toLocaleTimeString()+' · file saved '+new Date(f.lastModified).toLocaleTimeString()+'.');
+  }catch(err){stamp('Reload failed: '+err.message+'.')}
+  schedule();
+}
+$('pick').onclick=async()=>{
+  if(!window.showOpenFilePicker){stamp('This browser/view cannot auto reload. Use Chrome or Edge on desktop.');return}
+  try{
+    [handle]=await showOpenFilePicker({types:[{description:'Excel/CSV',accept:{'application/vnd.ms-excel':['.xls'],'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':['.xlsx'],'text/csv':['.csv']}}]});
+    resetHist();await reload();
+  }catch(err){if(err.name!=='AbortError')stamp('Could not open file: '+err.message+'.')}
+};
+$('every').onchange=schedule;
+$('refresh').onclick=reload;
+setInterval(()=>{
+  const s=next?Math.max(0,Math.round((next-Date.now())/1000)):0;
+  $('next').textContent=next?'Next reload in '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'):'';
+},1000);
+$('file').addEventListener('change',async e=>{
+  const f=e.target.files[0];if(!f)return;
+  handle=null;schedule();resetHist();
+  try{parseBuf(await f.arrayBuffer());stamp('One-time upload (no auto reload).')}
+  catch(err){$('out').textContent='Could not read file: '+err.message}
+});
+$('th').addEventListener('input',render);
+$('step').addEventListener('input',render);
+$('topn').addEventListener('input',render);
+$('filter').addEventListener('input',render);
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{$('topn').value=b.dataset.t;render()});
+$('near').addEventListener('input',render);
+$('base').addEventListener('change',render);
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{$('th').value=b.dataset.p;render()});
+$('sample').onclick=()=>load([
+  {Symbol:'NIFTY',StrikePrice:0,OpType:'',LTP:25003.65,Money:0},
+  {ExpDate:'17-NOV-2026',StrikePrice:25000,OpType:'CE',Money:6652,LTP:62.85,ATP:50.73},{StrikePrice:25000,OpType:'PE',Money:16500,LTP:30.25,ATP:91.56},
+  {StrikePrice:24900,OpType:'CE',Money:4241},{StrikePrice:24900,OpType:'PE',Money:11915},
+  {StrikePrice:25100,OpType:'CE',Money:8241},{StrikePrice:25100,OpType:'PE',Money:9415}]);
+</script>
+</body>
+</html>

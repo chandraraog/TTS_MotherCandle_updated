@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MACD top-down scan</title>
+<style>
+:root{--bg:#f5f6f8;--panel:#fff;--ink:#161b22;--mute:#667085;--line:#e4e7ec;
+--bull:#0a8f6c;--bull-bg:#e3f5ef;--bear:#d0364a;--bear-bg:#fde8eb;--wait:#a86b0a;--wait-bg:#fdf3dc}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--panel:#171c23;--ink:#e8ebf0;--mute:#8a94a3;--line:#262d37;
+--bull:#3ccf9f;--bull-bg:#12342b;--bear:#ff6b7d;--bear-bg:#3a1a20;--wait:#f0b84a;--wait-bg:#3a2e12}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body[data-side=buy]{--acc:var(--bull);--acc-bg:var(--bull-bg)}
+body[data-side=sell]{--acc:var(--bear);--acc-bg:var(--bear-bg)}
+main{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+h1{font-size:22px;margin:0 0 4px;font-weight:650}
+.meta{color:var(--mute);font-size:13px;margin:0 0 22px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 16px;border-radius:8px;
+font:inherit;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tab b{background:var(--line);border-radius:10px;padding:0 8px;font-size:12px;line-height:20px}
+.tab[aria-selected=true]{border-color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
+.tab[aria-selected=true] b{background:var(--acc-bg);color:var(--acc)}
+.sp{flex:1}
+input[type=search]{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 12px;border-radius:8px;font:inherit;width:170px}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 14px;border-radius:8px;font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:16px;overflow:hidden}
+section h2{margin:0;padding:14px 16px 2px;font-size:16px;font-weight:650;display:flex;gap:8px;align-items:center}
+section h2 span{color:var(--mute);font-weight:500;font-size:13px}
+section p{margin:0;padding:0 16px 10px;color:var(--mute);font-size:13px}
+.row{display:grid;grid-template-columns:110px 1fr 190px;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.sym{font-weight:650;color:var(--ink);text-decoration:none}
+.sym:hover{color:var(--acc);text-decoration:underline}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{min-width:34px;text-align:center;font-size:12px;font-weight:600;padding:3px 7px;border-radius:6px;border:1px solid var(--line);color:var(--mute)}
+.chip.on{background:var(--acc-bg);border-color:var(--acc);color:var(--acc)}
+.chip.next{background:var(--wait-bg);border:1px dashed var(--wait);color:var(--wait)}
+.wait{font-size:13px;color:var(--mute)}
+.wait b{color:var(--wait);font-weight:600}
+.empty{padding:18px 16px;color:var(--mute);border-top:1px solid var(--line);font-size:14px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin:0 0 18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+main{max-width:1040px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;margin:0 0 8px}
+select{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 10px;border-radius:8px;font:inherit}
+summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;padding:14px 16px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:7px;height:7px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(-45deg);transition:transform .15s}
+details[open]>summary::before{transform:rotate(45deg)}
+.gt{font-weight:650;font-size:16px}
+.gc{background:var(--acc-bg);color:var(--acc);border-radius:10px;padding:0 8px;font-size:12px;font-weight:600;line-height:20px}
+.gn{color:var(--mute);font-size:13px;flex-basis:100%;padding-left:17px}
+.gempty{display:flex;gap:10px;align-items:center;padding:10px 16px;margin-bottom:16px;border:1px dashed var(--line);border-radius:10px;color:var(--mute);font-size:14px}
+.gempty .gt{font-size:14px;font-weight:600;color:var(--mute)}
+.row{grid-template-columns:110px 84px 1fr 48px 210px}
+.price{font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+input[type=number]{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 12px;border-radius:8px;font:inherit;width:120px}
+.row:hover{background:color-mix(in srgb,var(--acc) 7%,transparent)}
+.cnt{font-size:13px;font-weight:600;color:var(--acc);text-align:right}
+.st{color:var(--mute)}
+@media(max-width:640px){.row{grid-template-columns:1fr;gap:6px}.cnt{text-align:left}input[type=search],input[type=number]{width:100%}.price{text-align:left}}
+</style>
+</head>
+<body data-side="buy">
+<main>
+  <h1>MACD top-down scan</h1>
+  <p class="meta" id="meta"></p>
+  <div class="bar">
+    <button class="tab" role="tab" id="t-buy" aria-selected="true">Buy setups <b id="n-buy">0</b></button>
+    <button class="tab" role="tab" id="t-sell" aria-selected="false">Sell / exit signals <b id="n-sell">0</b></button>
+    <span class="sp"></span>
+    <select id="sort" aria-label="Sort"><option value="len">Longest chain first</option><option value="phigh">Price: high to low</option><option value="plow">Price: low to high</option><option value="az">A to Z</option></select>
+    <input type="number" id="minp" placeholder="Min price" min="0" aria-label="Minimum price">
+    <input type="search" id="q" placeholder="Filter symbol" aria-label="Filter by symbol">
+    <button class="btn" id="copy">Copy for TradingView</button>
+  </div>
+  <div class="legend">
+    <span><span class="chip on">D</span> aligned</span>
+    <span><span class="chip next">4H</span> next timeframe to confirm</span>
+    <span><span class="chip">1H</span> not checked yet</span>
+  </div>
+  <div id="out"></div>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+let D = {"stamp": "09 Nov 2026, 17:18", "order": ["M", "W", "D", "4H", "1H", "15m", "5m"], "min": 2, "scanned": 54, "buy": [{"short": "NIFTY50-INDEX", "tv": "NSE:NIFTY50-INDEX", "count": 4, "aligned": ["M", "W", "D", "4H"], "waiting": "1H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 25044.65}, {"short": "NIFTYBANK-INDEX", "tv": "NSE:NIFTYBANK-INDEX", "count": 4, "aligned": ["M", "W", "D", "4H"], "waiting": "1H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 59741.25}, {"short": "INDIGO", "tv": "NSE:INDIGO", "count": 4, "aligned": ["M", "W", "D", "4H"], "waiting": "1H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 5430.0}, {"short": "BHARTIARTL", "tv": "NSE:BHARTIARTL", "count": 3, "aligned": ["M", "W", "D"], "waiting": "4H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 2072.1}, {"short": "DRREDDY", "tv": "NSE:DRREDDY", "count": 3, "aligned": ["M", "W", "D"], "waiting": "4H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 1385.0}, {"short": "ETERNAL", "tv": "NSE:ETERNAL", "count": 3, "aligned": ["M", "W", "D"], "waiting": "4H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 363.45}, {"short": "JSWSTEEL", "tv": "NSE:JSWSTEEL", "count": 3, "aligned": ["M", "W", "D"], "waiting": "4H", "waiting_state": "Weakening", "category": "PULLBACK", "price": 1347.0}, {"short": "KOTAKBANK", "tv": "NSE:KOTAKBANK", "count": 3, "aligned": ["M", "W", "D"], "waiting": "4H", "waiting_state": "-", "category": "PULLBACK", "price": 447.95}], "sell": []};
+const state = {side: "buy", q: "", sort: "len", minp: 0, live: null};
+const GROUPS = {
+  buy: [
+    ["FULL", "Full alignment", "Every timeframe is Strong Bull. Trend is running; look for a continuation or breakout entry."],
+    ["NEAR", "Entry zone", "Higher timeframes are Strong Bull and the next one down is already turning up. Trigger is close."],
+    ["PULLBACK", "Pullback watchlist", "Higher timeframes are Strong Bull but a lower one is still pulling back. Wait for it to turn."]],
+  sell: [
+    ["FULL", "Full alignment", "Every timeframe is Strong Bear. Downtrend is running; short or exit longs."],
+    ["NEAR", "Entry zone", "Higher timeframes are Strong Bear and the next one down is turning down. Trigger is close."],
+    ["PULLBACK", "Bounce watchlist", "Higher timeframes are Strong Bear but a lower one is bouncing. Wait for it to roll over."]]
+};
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const fmtP = p => p == null ? "-" : Number(p).toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const PHRASE = {"Recovering": "turning up", "Weakening": "turning down", "Strong Bull": "still bullish", "Strong Bear": "still bearish"};
+
+function rowHtml(r) {
+  const chips = D.order.map(tf =>
+    `<span class="chip ${r.aligned.includes(tf) ? "on" : tf === r.waiting ? "next" : ""}">${esc(tf)}</span>`).join("");
+  const wait = r.waiting === "-" ? "All timeframes aligned"
+    : `Waiting on <b>${esc(r.waiting)}</b> <span class="st">${esc(PHRASE[r.waiting_state] || r.waiting_state)}</span>`;
+  return `<div class="row">
+    <a class="sym" target="_blank" rel="noopener" href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(r.tv)}">${esc(r.short)}</a>
+    <div class="price">${fmtP(r.price)}</div>
+    <div class="chips">${chips}</div><div class="cnt" title="Timeframes aligned">${r.count}/${D.order.length}</div><div class="wait">${wait}</div></div>`;
+}
+
+function visible(side) {
+  const q = state.q.trim().toUpperCase();
+  const rows = D[side].filter(r => (!q || r.short.includes(q)) && (!state.minp || (r.price || 0) >= state.minp));
+  const byName = (a, b) => a.short.localeCompare(b.short);
+  const byLen = (a, b) => (b.count - a.count) || byName(a, b);
+  const sorters = {az: byName, len: byLen,
+    phigh: (a, b) => ((b.price || 0) - (a.price || 0)) || byLen(a, b),
+    plow: (a, b) => ((a.price || 0) - (b.price || 0)) || byLen(a, b)};
+  return rows.sort(sorters[state.sort] || byLen);
+}
+
+function setMeta() {
+  document.getElementById("meta").textContent =
+    `${D.stamp}  |  ${D.order.join(" > ")}  |  minimum chain ${D.min}  |  ${D.scanned} stocks scanned` +
+    (state.live === true ? "  |  live" : state.live === false ? "  |  scanner stopped" : "");
+}
+
+function render() {
+  setMeta();
+  document.body.dataset.side = state.side;
+  for (const s of ["buy", "sell"]) {
+    document.getElementById("t-" + s).setAttribute("aria-selected", s === state.side);
+    document.getElementById("n-" + s).textContent = D[s].length;
+  }
+  const rows = visible(state.side);
+  let html = "";
+  for (const [key, title, note] of GROUPS[state.side]) {
+    const g = rows.filter(r => r.category === key);
+    html += g.length
+      ? `<section><details open><summary><span class="gt">${title}</span><span class="gc">${g.length}</span><span class="gn">${note}</span></summary>${g.map(rowHtml).join("")}</details></section>`
+      : `<div class="gempty"><span class="gt">${title}</span><span>None right now</span></div>`;
+  }
+  if (D.pending)
+    html = `<section><div class="empty">First scan is running. Results appear here by themselves.</div></section>`;
+  else if (!D[state.side].length)
+    html = `<section><div class="empty">No stocks matched. Try a lower minimum chain (--min 2) or start the chain lower (--anchor W).</div></section>`;
+  document.getElementById("out").innerHTML = html;
+}
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+document.getElementById("t-buy").onclick = () => { state.side = "buy"; render(); };
+document.getElementById("t-sell").onclick = () => { state.side = "sell"; render(); };
+document.getElementById("minp").oninput = e => { state.minp = parseFloat(e.target.value) || 0; render(); };
+document.getElementById("sort").onchange = e => { state.sort = e.target.value; render(); };
+document.getElementById("q").oninput = e => { state.q = e.target.value; render(); };
+document.getElementById("copy").onclick = async () => {
+  const list = visible(state.side).map(r => r.tv).join(",");
+  if (!list) return toast("Nothing to copy");
+  try { await navigator.clipboard.writeText(list); toast("Copied " + visible(state.side).length + " symbols"); }
+  catch (e) { prompt("Copy these symbols:", list); }
+};
+if (location.protocol.indexOf("http") === 0) {
+  let ver = D.version || 0;
+  const poll = async () => {
+    try {
+      const d = await (await fetch("/data.json", {cache: "no-store"})).json();
+      state.live = true;
+      if (d.version && d.version !== ver) { ver = d.version; D = d; render(); toast("Updated " + d.stamp); }
+      else setMeta();
+    } catch (e) { state.live = false; setMeta(); }
+  };
+  setInterval(poll, 5000);
+}
+render();
+</script>
+</body>
+</html>
