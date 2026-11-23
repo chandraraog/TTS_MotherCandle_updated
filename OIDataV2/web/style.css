@@ -306,6 +306,8 @@ body[data-page="oi"] .oi-hover-summary,body[data-page="macd"] .oi-hover-summary{
 body[data-page="oi"] .oi-hover-title,body[data-page="macd"] .oi-hover-title{color:#172433;font-weight:700}
 body[data-page="oi"] .oi-hover-net,body[data-page="macd"] .oi-hover-net{color:#172433}
 :root[data-theme="dark"] body[data-page="money"] .money-recent-oi-net strong{color:#f1f5f9}
+:root[data-theme="dark"] body[data-page="money"] .money-recent-oi-mtd{color:#dce4ec;background:#17241f}
+:root[data-theme="dark"] body[data-page="money"] .money-recent-oi-mtd .oi-hover-mtd-label{color:#dce4ec}
 body[data-page="oi"] .oi-hover-summary td:first-child,body[data-page="macd"] .oi-hover-summary td:first-child{background:#fff!important;color:#172433!important}body[data-page="money"] .money-match-pulse{animation:money-match-pulse 1.8s ease-in-out infinite}
 @keyframes money-match-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--green) 3%,transparent)}50%{box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 32%,transparent)}}
 @media(prefers-reduced-motion:reduce){body[data-page="money"] .money-match-pulse{animation:none;outline:2px solid color-mix(in srgb,var(--green) 45%,transparent)}}
